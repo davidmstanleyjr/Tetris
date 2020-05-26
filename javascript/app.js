@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 	//grid stuff
 	const grid = document.querySelector('.grid');
+	let squares = Array.from(grid.querySelectorAll('div'));
 	const width = 10;
 	const height = 20;
+	let currentPosition = 4;
 
 	//Tetrominoes
 	const lTetromino = [
@@ -39,4 +41,40 @@ document.addEventListener('DOMContentLoaded', () => {
 		[ 1, width + 1, width * 2 + 1, width * 3 + 1 ],
 		[ width, width + 1, width + 2, width + 3 ]
 	];
+
+	const theTetrominoes = [ lTetromino, zTetromino, tTetromino, oTetromino, iTetromino ];
+
+	//this randomly selects the Tetromino
+	let random = Math.floor(Math.random() * theTetrominoes.length);
+	let currentRotation = 0;
+	let current = theTetrominoes[random][currentRotation];
+
+	//this draws the shapes
+	function draw() {
+		current.forEach((index) => squares[currentPosition + index].classList.add('block'));
+	}
+
+	//undraw the shape
+	function undraw() {
+		current.forEach((index) => squares[currentPosition + index].classList.remove('block'));
+	}
+
+	//this moves down the shape
+	function moveDown() {
+		undraw();
+		currentPosition = currentPosition += width;
+		draw();
+		freeze();
+	}
+
+	// this moves left and prevents collisions with shapes
+	function moveRight() {
+		undraw();
+		const isAtRightEdge = current.some((index) => (currentPosition + index) % width === -1);
+		if (!isAtRightEdge) currentPosition += 1;
+		if (current.some((nidex) => squares[currentPosition + index].classList.contains('block2'))) {
+			currentPosition -= 1;
+		}
+		draw();
+	}
 });
