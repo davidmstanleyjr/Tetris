@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap');
+
 :root {
 	/* default font size in browsers is 16px = 1em, we make
        things easier for us and make 10px our base size.
@@ -11,7 +13,7 @@
 }
 
 body {
-	font-family: "Montserrat", sans-serif;
+	font-family: 'Chelsea Market', cursive;
 	font-size: 1.6rem;
 	margin: auto;
 	max-width: 60rem;
